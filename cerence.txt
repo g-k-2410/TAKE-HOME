@@ -1,0 +1,64 @@
+# 1
+def groupAnagrams(words):
+    anagram_groups = {}  # Dictionary to hold anagram groups
+    
+    for word in words:
+        # Constraint 1: Check all characters are lowercase a-z
+        for char in word:
+            if not ('a' <= char <= 'z'):
+                raise ValueError(f"Invalid character '{char}' in word '{word}'. Only lowercase a-z allowed.")
+        
+        # Generate sorted key for the word
+        sorted_word = ''.join(sorted(word))
+        
+        # Group words by their sorted key
+        if sorted_word not in anagram_groups:
+            anagram_groups[sorted_word] = []
+        anagram_groups[sorted_word].append(word)
+    
+    # Return the grouped anagrams
+    return list(anagram_groups.values())
+
+# Example usage:
+words = ["eat", "tea", "tan", "ate", "nat", "bat"]
+print(groupAnagrams(words))
+# Output: [['eat', 'tea', 'ate'], ['tan', 'nat'], ['bat']]
+
+
+
+
+
+------------------------------------------------------------------------------------
+
+
+
+
+def longestVowelSubsequence(s):
+    # Check input constraints
+    if len(s) <= 5 or len(s) >= 5 * 10**5:
+        return 0
+    for char in s:
+        if char not in {'a', 'e', 'i', 'o', 'u'}:
+            return 0
+    
+    # Track the maximum valid counts for each vowel in order
+    a = e = i = o = u = 0
+    
+    for char in s:
+        if char == 'a':
+            a += 1
+        elif char == 'e':
+            e = max(e, a) + 1  # 'e' must come after 'a'
+        elif char == 'i':
+            i = max(i, e) + 1  # 'i' must come after 'e'
+        elif char == 'o':
+            o = max(o, i) + 1  # 'o' must come after 'i'
+        elif char == 'u':
+            u = max(u, o) + 1  # 'u' must come after 'o'
+    
+    # Return the result only if all vowels are present
+    return u if u >= 5 else 0
+    
+s = 'aeeeiouu'
+k=longestVowelSubsequence(s)
+print(k)
