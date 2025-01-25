@@ -1,0 +1,3 @@
+It has very poor inference ability because the training has not been done properly.
+
+Your task is to modify the hyperparameters and make changes so that the loss function goes on decreasing, and the inference makes sense.
